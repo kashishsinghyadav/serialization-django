@@ -8,7 +8,7 @@ from django.http import HttpResponse,JsonResponse
 # #for only single instance
 def stu_det(request,pk):
     stu=Student.objects.get(id=pk)
-    print(stu)
+    
     serial=StudentSerializer(stu)
     return JsonResponse(serial.data)
 
@@ -28,6 +28,7 @@ def stu_list(request):
     serial=StudentSerializer(stu,many=True)
    
     jsondata=JSONRenderer().render(serial.data)
+    # return JsonResponse(serial.data,safe=false)
     
     return HttpResponse(jsondata,content_type='application/json')
 
